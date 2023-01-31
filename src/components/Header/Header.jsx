@@ -1,7 +1,9 @@
 import React from 'react';
 import {AppBar, Toolbar, Typography, Button, Tooltip} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import {useTelegram} from "../../hooks/useTelegram";
 export const Header = () => {
+    const { tg, user, onClose } = useTelegram()
     return (
         <>
             <AppBar position='static' color='transparent' sx={{mb : 2}}>
@@ -9,7 +11,7 @@ export const Header = () => {
                     <Typography
                         variant='h5' sx={{fontWeight: 'bold'}}
                     >
-                        username
+                        {user?.username}
                     </Typography>
                     <Tooltip title="Close page">
                         <Button
@@ -19,6 +21,7 @@ export const Header = () => {
                                     color: 'var(--tg-theme-button-text-color)'
                                 }}
                             variant="contained"
+                            onClick={onClose}
                         >
                             <CloseIcon/>
                         </Button>
@@ -28,4 +31,3 @@ export const Header = () => {
         </>
     );
 };
-
