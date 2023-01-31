@@ -1,16 +1,14 @@
 import React, {useEffect} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {Form, Header, ProductList} from './components'
-const {Telegram : {WebApp}} = window
+import {useTelegram} from "./hooks/useTelegram";
 
 export const App = () => {
-    const onClose = () => {
-        WebApp.close();
-    }
+    const { tg, onToggleButton } = useTelegram();
 
     useEffect(() => {
-        WebApp.ready();
-    },[])
+        tg.ready()
+    }, [])
 
     return (
         <>
@@ -22,3 +20,5 @@ export const App = () => {
         </>
     );
 };
+
+
