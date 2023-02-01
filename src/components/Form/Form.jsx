@@ -24,14 +24,46 @@ export const Form = () => {
     ]
     return (
         <Container>
-            <Typography component='span' sx={{display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '300px', m: '0 auto'}}>
-                <Input placeholder='name' onChange={onChangeName}/>
-                <Input placeholder='last name' onChange={onChangeLastName}/>
-                <Input placeholder='city' onChange={onChangeCity}/>
-                <Input placeholder='street' onChange={onChangeStreet}/>
-                <Input placeholder='number' onChange={onChangeNumber}/>
-                <FormControl sx={{ m: 1, width: 300 }}>
-                    <InputLabel sx={{p: '5px'}} variant="standard" htmlFor="uncontrolled-native">Delivery methods</InputLabel>
+            <Typography
+                component='span'
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    maxWidth: '300px',
+                    m: '0 auto'
+            }}>
+                <Typography>Fill out the form</Typography>
+                <Input
+                    placeholder='name'
+                    onChange={onChangeName}
+                />
+                <Input
+                    placeholder='last name'
+                    onChange={onChangeLastName}
+                />
+                <Input
+                    placeholder='city'
+                    onChange={onChangeCity}
+                />
+                <Input
+                    placeholder='street'
+                    onChange={onChangeStreet}
+                />
+                <Input
+                    placeholder='number'
+                    onChange={onChangeNumber}
+                />
+                <FormControl
+                    sx={{ m: 1, width: 300 }}
+                >
+                    <InputLabel
+                        sx={{p: '5px'}}
+                        variant="standard"
+                        htmlFor="uncontrolled-native"
+                    >
+                        Delivery methods
+                    </InputLabel>
                     <Select
                         labelId="demo-multiple-name-label"
                         id="demo-multiple-name"
