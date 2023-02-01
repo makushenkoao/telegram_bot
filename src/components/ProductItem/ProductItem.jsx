@@ -10,7 +10,7 @@ export const ProductItem = ({ product, onAdd}) => {
     }
 
     return (
-        <Grid sx={{textAlign: 'center', alignItems: 'center', border: '1px solid teal', p: '10px'}}>
+        <Grid sx={{textAlign: 'center', alignItems: 'center', border: '1px solid teal', p: '10px', width: '210px'}}>
             <Typography sx={{bgcolor: 'lightblue', width: '50px', height: '50px', margin: '0 auto'}}/>
             <Typography>{product.title}</Typography>
             <Typography>{product.description}</Typography>
