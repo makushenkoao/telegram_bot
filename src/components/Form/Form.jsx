@@ -56,8 +56,9 @@ export const Form = () => {
     }, [name, lastName, number, city, street]);
 
     useEffect(() => {
+        tg.onEvent('mainButtonClicked', sendData)
         return () => {
-            tg.onEvent('mainButtonClicked', sendData)
+            tg.offEvent('mainButtonClicked', sendData)
         }
     }, [])
 
