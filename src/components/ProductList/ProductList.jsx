@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ProductItem} from "../ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
 import {Grid} from "@mui/material";
@@ -22,7 +22,31 @@ const getTotalPrice = (items = []) => {
 
 export const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
-    const { tg } = useTelegram()
+    const { tg, queryId } = useTelegram()
+
+    const sendData = useCallback(() => {
+        const data = {
+            products: addedItems,
+            totalPrice: getTotalPrice(addedItems),
+            queryId,
+        }
+
+        fetch('http://localhost:8000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+    }, [])
+
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', sendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', sendData)
+        }
+    }, [sendData])
 
     const onAdd = product => {
         const alreadyAdded = addedItems.find(_ => _.id === product.id);
