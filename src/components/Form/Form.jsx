@@ -37,22 +37,42 @@ export const Form = () => {
                 <Input
                     placeholder='name'
                     onChange={onChangeName}
+                    sx={{
+                        background: 'var(--tg-theme-bg-color)',
+                        color: 'var(--tg-theme-text-color),'
+                    }}
                 />
                 <Input
                     placeholder='last name'
                     onChange={onChangeLastName}
+                    sx={{
+                        background: 'var(--tg-theme-bg-color)',
+                        color: 'var(--tg-theme-text-color),'
+                    }}
                 />
                 <Input
                     placeholder='city'
                     onChange={onChangeCity}
+                    sx={{
+                        background: 'var(--tg-theme-bg-color)',
+                        color: 'var(--tg-theme-text-color),'
+                    }}
                 />
                 <Input
                     placeholder='street'
                     onChange={onChangeStreet}
+                    sx={{
+                        background: 'var(--tg-theme-bg-color)',
+                        color: 'var(--tg-theme-text-color),'
+                    }}
                 />
                 <Input
                     placeholder='number'
                     onChange={onChangeNumber}
+                    sx={{
+                        background: 'var(--tg-theme-bg-color)',
+                        color: 'var(--tg-theme-text-color),'
+                    }}
                 />
                 <FormControl
                     sx={{ m: 1, width: 300 }}
@@ -61,19 +81,32 @@ export const Form = () => {
                         sx={{p: '5px'}}
                         variant="standard"
                         htmlFor="uncontrolled-native"
+                        sx={{
+                            background: 'var(--tg-theme-bg-color)',
+                            color: 'var(--tg-theme-text-color),'
+                        }}
                     >
                         Delivery methods
                     </InputLabel>
                     <Select
+                        sx={{width: '250px'}}
                         labelId="demo-multiple-name-label"
                         id="demo-multiple-name"
                         value={delivery}
                         onChange={onChangeDelivery}
+                        sx={{
+                            background: 'var(--tg-theme-bg-color)',
+                            color: 'var(--tg-theme-text-color),'
+                        }}
                     >
                         {DeliveryMethods.map(method => (
                             <MenuItem
                                 key={method}
                                 value={method}
+                                sx={{
+                                    background: 'var(--tg-theme-bg-color)',
+                                    color: 'var(--tg-theme-text-color),'
+                                }}
                             >
                                 {method}
                             </MenuItem>
