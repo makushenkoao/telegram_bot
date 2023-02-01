@@ -37,7 +37,6 @@ export const Form = () => {
             street,
             delivery,
         }
-
         tg.sendData(JSON.stringify(data))
     }, [])
 
