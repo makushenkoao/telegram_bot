@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {Container, Input, FormControl, InputLabel, Select, MenuItem, Typography} from "@mui/material";
 import {useTelegram} from "../../hooks/useTelegram";
-import {Telegram} from "@mui/icons-material";
 
 export const Form = () => {
+    const { tg } = useTelegram()
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [number, setNumber] = useState('');
@@ -19,15 +19,6 @@ export const Form = () => {
         'Pickup from our stores',
     ]
 
-    const onChangeCity = ({ target : { value } }) => setCity(value)
-    const onChangeName = ({ target : { value } }) => setName(value)
-    const onChangeLastName = ({ target : { value } }) => setLastName(value)
-    const onChangeNumber = ({ target : { value } }) => setNumber(value)
-    const onChangeStreet = ({ target : { value } }) => setStreet(value)
-    const onChangeDelivery = ({ target : { value } }) => setDelivery(value)
-
-    const { tg } = useTelegram()
-
     const sendData = useCallback(() => {
         const data = {
             name,
@@ -37,14 +28,22 @@ export const Form = () => {
             street,
             delivery,
         }
-        tg.sendData(JSON.stringify(data))
+        tg.sendData(JSON.stringify(data));
     }, [name, lastName, number, city, street, delivery])
+
+    useEffect(() => {
+        tg.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tg.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [sendData])
+
 
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Send data'
         })
-    },[sendData]);
+    },[]);
 
     useEffect(() => {
         if (street && name && lastName && number && city) {
@@ -54,12 +53,12 @@ export const Form = () => {
         }
     }, [name, lastName, number, city, street]);
 
-    useEffect(() => {
-        tg.onEvent('mainButtonClicked', sendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', sendData)
-        }
-    }, [])
+    const onChangeCity = ({ target : { value } }) => setCity(value)
+    const onChangeName = ({ target : { value } }) => setName(value)
+    const onChangeLastName = ({ target : { value } }) => setLastName(value)
+    const onChangeNumber = ({ target : { value } }) => setNumber(value)
+    const onChangeStreet = ({ target : { value } }) => setStreet(value)
+    const onChangeDelivery = ({ target : { value } }) => setDelivery(value)
 
     return (
         <Container>
