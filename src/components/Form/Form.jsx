@@ -89,24 +89,20 @@ export const Form = () => {
                         Delivery methods
                     </InputLabel>
                     <Select
-                        sx={{width: '250px'}}
                         labelId="demo-multiple-name-label"
                         id="demo-multiple-name"
                         value={delivery}
                         onChange={onChangeDelivery}
                         sx={{
                             background: 'var(--tg-theme-bg-color)',
-                            color: 'var(--tg-theme-text-color),'
+                            color: 'var(--tg-theme-text-color)',
+                            width: '250px'
                         }}
                     >
                         {DeliveryMethods.map(method => (
                             <MenuItem
                                 key={method}
                                 value={method}
-                                sx={{
-                                    background: 'var(--tg-theme-bg-color)',
-                                    color: 'var(--tg-theme-text-color),'
-                                }}
                             >
                                 {method}
                             </MenuItem>
