@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {Container, Input, FormControl, InputLabel, Select, MenuItem, Typography} from "@mui/material";
+import {useTelegram} from "../../hooks/useTelegram";
 
 export const Form = () => {
     const [name, setName] = useState('');
@@ -9,12 +10,7 @@ export const Form = () => {
     const [street, setStreet] = useState('');
     const [delivery, setDelivery] = useState('Pickup from Nova Poshta');
 
-    const onChangeCity = ({ target : { value } }) => setCity(value)
-    const onChangeName = ({ target : { value } }) => setName(value)
-    const onChangeLastName = ({ target : { value } }) => setLastName(value)
-    const onChangeNumber = ({ target : { value } }) => setNumber(value)
-    const onChangeStreet = ({ target : { value } }) => setStreet(value)
-    const onChangeDelivery = ({ target : { value } }) => setDelivery(value)
+
     const DeliveryMethods = [
         'Pickup from Nova Poshta',
         'Pickup from Ukrposhta',
@@ -22,6 +18,30 @@ export const Form = () => {
         'Courier Nova Poshta',
         'Pickup from our stores',
     ]
+
+    const onChangeCity = ({ target : { value } }) => setCity(value)
+    const onChangeName = ({ target : { value } }) => setName(value)
+    const onChangeLastName = ({ target : { value } }) => setLastName(value)
+    const onChangeNumber = ({ target : { value } }) => setNumber(value)
+    const onChangeStreet = ({ target : { value } }) => setStreet(value)
+    const onChangeDelivery = ({ target : { value } }) => setDelivery(value)
+
+    const { tg } = useTelegram()
+
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'Send data'
+        })
+    },[])
+
+    useEffect(() => {
+        if (street && name && lastName && number && city) {
+            tg.MainButton.show()
+        } else {
+            tg.MainButton.hide()
+        }
+    }, [name, lastName, number, city, street])
+
     return (
         <Container>
             <Typography
@@ -78,12 +98,12 @@ export const Form = () => {
                     sx={{ m: 1, width: 300 }}
                 >
                     <InputLabel
-                        sx={{p: '5px'}}
                         variant="standard"
                         htmlFor="uncontrolled-native"
                         sx={{
                             background: 'var(--tg-theme-bg-color)',
-                            color: 'var(--tg-theme-text-color),'
+                            color: 'var(--tg-theme-text-color)',
+                            p: '5px'
                         }}
                     >
                         Delivery methods
