@@ -38,7 +38,7 @@ export const Form = () => {
             delivery,
         }
         tg.sendData(JSON.stringify(data))
-    }, [])
+    }, [name, lastName, number, city, street]))
 
     useEffect(() => {
         tg.MainButton.setParams({
