@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Typography, Button, Grid } from "@mui/material";
 
-export const ProductItem = ({ product, className, onAdd, Avatar }) => {
+export const ProductItem = ({ product, onAdd}) => {
+    const [isAdded, setIsAdded] = useState(false)
 
     const onAddHandler = () => {
         onAdd(product)
+        setIsAdded(prevState => !prevState)
     }
 
     return (
@@ -21,7 +23,7 @@ export const ProductItem = ({ product, className, onAdd, Avatar }) => {
                         bgcolor: 'var(--tg-theme-button-color)',
                         color: 'var(--tg-theme-button-text-color)'
                     }}
-            >Add to Shopping Cart</Button>
+            >{!isAdded ? 'Add to Shopping Cart' : 'Remove from cart'}</Button>
         </Grid >
     );
 };
