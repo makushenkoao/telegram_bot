@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Container, Input, FormControl, InputLabel, Select, MenuItem, Typography} from "@mui/material";
 import {useTelegram} from "../../hooks/useTelegram";
+import {Telegram} from "@mui/icons-material";
 
 export const Form = () => {
     const [name, setName] = useState('');
@@ -9,7 +10,6 @@ export const Form = () => {
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
     const [delivery, setDelivery] = useState('Pickup from Nova Poshta');
-
 
     const DeliveryMethods = [
         'Pickup from Nova Poshta',
@@ -28,11 +28,24 @@ export const Form = () => {
 
     const { tg } = useTelegram()
 
+    const sendData = useCallback(() => {
+        const data = {
+            name,
+            lastName,
+            number,
+            city,
+            street,
+            delivery,
+        }
+
+        tg.sendData(JSON.stringify(data))
+    }, [])
+
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Send data'
         })
-    },[])
+    },[]);
 
     useEffect(() => {
         if (street && name && lastName && number && city) {
@@ -40,7 +53,13 @@ export const Form = () => {
         } else {
             tg.MainButton.hide()
         }
-    }, [name, lastName, number, city, street])
+    }, [name, lastName, number, city, street]);
+
+    useEffect(() => {
+        return () => {
+            tg.onEvent('mainButtonClicked', sendData)
+        }
+    }, [])
 
     return (
         <Container>
