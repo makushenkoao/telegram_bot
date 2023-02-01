@@ -44,7 +44,7 @@ export const Form = () => {
         tg.MainButton.setParams({
             text: 'Send data'
         })
-    },[]);
+    },[sendData]);
 
     useEffect(() => {
         if (street && name && lastName && number && city) {
